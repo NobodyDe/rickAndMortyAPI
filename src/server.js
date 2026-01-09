@@ -4,7 +4,7 @@ export async function rickApi(page) {
   );
   const json = await response.json();
 
-  // const charactes = json.results;
+  // return json.results;
 
-  return json.results;
+  return json;
 }
