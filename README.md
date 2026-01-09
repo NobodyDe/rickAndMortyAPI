@@ -116,5 +116,5 @@ Este projeto está sob a licença MIT.
 ---
 
 <div align="center">
-  Desenvolvido com 💜 por [Seu Nome]
+  Desenvolvido com 💜 por Nobody
 </div>
