@@ -1,0 +1,9 @@
+:root {
+  --content-background: rgb(39, 43, 51);
+  --card-background: rgb(60, 62, 68);
+  --nav--background: #043c6e;
+
+  --font-size: 700 0.8rem/1rem "Roboto Mono";
+  --font-color: #ffff;
+  --font-secund-color: #abb2bf;
+}
