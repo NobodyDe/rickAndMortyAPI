@@ -3,12 +3,12 @@ import { numberPages } from "./pages.js";
 
 export const currentPage = document.querySelector(".current-page");
 
-async function charactersRecive(value) {
-  const data = await rickApi();
-  return data[0][value];
-}
+// async function charactersRecive(value) {
+//   const data = await rickApi();
+//   return data[0][value];
+// }
 
-charactersRecive();
+// charactersRecive();
 
 const container = document.querySelector(".container");
 
@@ -35,6 +35,7 @@ export async function renderCards(page, reset) {
     container.innerHTML = "";
   }
   const everyCharacter = await rickApi(page);
+  // const onlyCharacter = everyCharacter.results;
 
   async function getEpisode(character) {
     const response = await fetch(character);
@@ -43,7 +44,7 @@ export async function renderCards(page, reset) {
     return json.name;
   }
 
-  for (const character of everyCharacter) {
+  for (const character of everyCharacter.results) {
     const infos = [
       ["label", "Ultimo local visto:"],
       ["value", character.location.name],
@@ -73,7 +74,7 @@ export async function renderCards(page, reset) {
 
     const span = elementCreator(
       "span",
-      { class: statusClass(character.status) },
+      { class: await statusClass(character.status) },
       []
     );
 
@@ -84,7 +85,7 @@ export async function renderCards(page, reset) {
 
     const titleH2 = elementCreator(
       "h2",
-      { class: "card-title", text: character.name },
+      { class: "card-title", text: await character.name },
       []
     );
 
@@ -97,7 +98,7 @@ export async function renderCards(page, reset) {
     const imgCard = elementCreator(
       "img",
       {
-        src: character.image,
+        src: await character.image,
         alt: "Imagem do Personagem",
         class: "card-image",
       },
@@ -115,7 +116,14 @@ export async function renderCards(page, reset) {
     container.appendChild(divCard);
     console.log();
   }
-  console.log(divCard);
+  return everyCharacter.info.pages;
 }
-renderCards(currentPage.innerText);
-numberPages();
+
+async function render() {
+  const pages = await renderCards(currentPage.innerText);
+
+  void numberPages(pages);
+}
+
+console.log(await renderCards());
+render();
